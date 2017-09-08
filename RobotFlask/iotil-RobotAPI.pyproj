@@ -48,13 +48,16 @@
     <Content Include="requirements.txt" />
     <Content Include="RobotFlask\static\content\bootstrap.css" />
     <Content Include="RobotFlask\static\content\bootstrap.min.css" />
+    <Content Include="RobotFlask\static\content\command.css" />
     <Content Include="RobotFlask\static\content\site.css" />
+    <Content Include="RobotFlask\static\content\test.html" />
     <Content Include="RobotFlask\static\fonts\glyphicons-halflings-regular.eot" />
     <Content Include="RobotFlask\static\fonts\glyphicons-halflings-regular.svg" />
     <Content Include="RobotFlask\static\fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="RobotFlask\static\fonts\glyphicons-halflings-regular.woff" />
     <Content Include="RobotFlask\static\scripts\bootstrap.js" />
     <Content Include="RobotFlask\static\scripts\bootstrap.min.js" />
+    <Content Include="RobotFlask\static\scripts\command.js" />
     <Content Include="RobotFlask\static\scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="RobotFlask\static\scripts\jquery-1.10.2.js" />
     <Content Include="RobotFlask\static\scripts\jquery-1.10.2.min.js" />
@@ -65,6 +68,7 @@
     <Content Include="RobotFlask\static\scripts\jquery.validate.unobtrusive.js" />
     <Content Include="RobotFlask\static\scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="RobotFlask\static\scripts\modernizr-2.6.2.js" />
+    <Content Include="RobotFlask\static\scripts\mustach.js" />
     <Content Include="RobotFlask\static\scripts\respond.js" />
     <Content Include="RobotFlask\static\scripts\respond.min.js" />
     <Content Include="RobotFlask\static\scripts\_references.js" />

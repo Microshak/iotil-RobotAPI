@@ -1,33 +1,47 @@
 {% extends "layout.html" %}
 
 {% block content %}
+<link href="../static/content/command.css" rel="stylesheet" />
 
-<div class="jumbotron">
-    <h1>Flask</h1>
-    <p class="lead">Flask is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://flask.pocoo.org/" class="btn btn-primary btn-large">Learn more &raquo;</a></p>
-</div>
+<div id="command" class="list-group">
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
-        <p>
-            Flask gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
-        </p>
-        <p><a class="btn btn-default" href="http://flask.pocoo.org/docs/">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>The Python Package Index is a repository of software for the Python programming language.</p>
-        <p><a class="btn btn-default" href="https://pypi.python.org/pypi">Learn more &raquo;</a></p>
-    </div>
-    <div class="col-md-4">
-        <h2>Microsoft Azure</h2>
-        <p>You can easily publish to Microsoft Azure using Visual Studio. Find out how you can host your application using a free trial today.</p>
-        <p><a class="btn btn-default" href="http://azure.microsoft.com">Learn more &raquo;</a></p>
-    </div>
 </div>
+<div style="display:none;" id="commandMessages"></div>
+
+
+
+{% raw %}
+<script id="CommandInfo" type="text/template">
+   
+    <div><span>Speed</span><input t id="Speed{{_id.$oid}}" type="text" class="Speed" value="{{Speed}}" ></div>
+    <div><span>Friendly Name</span><input id="FriendlyName{{_id.$oid}}" type="text" class="FriendlyName" value="{{FriendlyName}}" ></div>
+    
+    <div><span>Order</span><input t id="Order{{_id.$oid}}" type="text" class="Order" value="{{Order}}" ></div>
+
+  
+</script>
+{% endraw %}
+{% raw %}
+<script id="CommandButtons" type="text/template">
+    
+    <div class="btn btn-default" onclick="SaveDetails(this,'{{_id.$oid}}')">
+        <i class="fa fa-save fa-lg"></i> Save
+    </div>
+    <br />
+    <div class="btn btn-default" onclick="MoveNow(this,'{{_id.$oid}}')">
+        <i class="fa fa-arrow-circle-right fa-lg"></i> Move Now
+    </div>
+</script>
+
+
+{% endraw %}
+
+
+
 
 {% endblock %}
+ {% block scripts %}
+<script src="../static/scripts/command.js"></script>
+<script src="../static/scripts/mustach.js"></script>
+{% endblock %}
+
