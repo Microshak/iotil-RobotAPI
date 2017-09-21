@@ -1,0 +1,10 @@
+codecs
+copy
+os
+util
+logging
+json
+cfn
+gziplib
+Template
+tarfile

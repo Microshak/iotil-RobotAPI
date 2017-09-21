@@ -13,8 +13,11 @@ import pymongo
 from pymongo import MongoClient
 
 from RobotFlask.mongo import db
+from RobotFlask.robot import robot
+
 
 app.register_blueprint(db)
+app.register_blueprint(robot)
 
 @app.route('/')
 @app.route('/home')
@@ -54,5 +57,6 @@ def api():
     dba = mongoclient.SawyerDB
 
     collection = dba.Command
+   
     data = collection.find_one({"Name": "Demo"})
     return dumps(data)

@@ -1,0 +1,12 @@
+pattern_manager
+pypi
+os
+pattern_egg
+logging
+subprocess
+_rpm
+pattern_egginfo
+glob
+_dpkg_query
+re
+pattern

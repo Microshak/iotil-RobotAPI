@@ -130,7 +130,7 @@ function getValues(id)
 function MoveNow(that, id)
 {
     var Command = getValues(id);
-    $.post("/command/Move",
+    $.post("/robot/Move",
         Command,
         function (data, status) {
            // alert("Data: " + data + "\nStatus: " + status);

@@ -1,0 +1,11 @@
+urlparse
+get
+socket
+httplib
+cfg
+post
+put
+_connect
+delete
+_request
+errno

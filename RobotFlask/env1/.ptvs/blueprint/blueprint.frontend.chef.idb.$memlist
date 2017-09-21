@@ -1,0 +1,13 @@
+Resource
+Cookbook
+base64
+util
+logging
+tarfile
+codecs
+File
+os
+walk
+chef
+errno
+re

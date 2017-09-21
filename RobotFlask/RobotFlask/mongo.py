@@ -17,6 +17,8 @@ from bson.code import Code
 from flask import Response
 from flask import request
 from bson.objectid import ObjectId
+from RobotFlask import common
+
 
 db = Blueprint('db', __name__)
 uri =app.config["mongouri"]
@@ -34,8 +36,9 @@ def get_command(name):
         
 
     return resp
-
+'''
 def generateData(dat):
+
        updateDic = {
             "Cartisian.position.x":dat['Cartisian[position][x]'],
             "Cartisian.position.y":dat['Cartisian[position][y]'],
@@ -49,21 +52,22 @@ def generateData(dat):
             "Speed":dat["Speed"]
         }
        return updateDic
- 
+
 @db.route('/command/Move', methods=['POST'])
 def save_command():
     
     dat = request.form
-   
-    updateDic = generateData(dat)
+    c = common();
     
-
+    updateDic = c.generateData(dat)
+    
+ '''
 @db.route('/command/Save', methods=['POST'])
 def save_command():
     
     dat = request.form
-   
-    updateDic = generateData(dat)
+    
+    updateDic =common.common.generateData(dat)
   
     
     collection.update(
@@ -107,3 +111,4 @@ def all_commands():
         
 
     return resp
+
