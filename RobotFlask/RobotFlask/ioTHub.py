@@ -3,18 +3,24 @@ import sys
 import iothub_service_client
 from iothub_service_client import IoTHubMessaging, IoTHubMessage, IoTHubError
 #from iothub_service_client_args import get_iothub_opt, OptionError
-
+import threading
 from RobotFlask import iothub_service_client_args   
-
-
+import time
+import asyncio
 OPEN_CONTEXT = 0
 FEEDBACK_CONTEXT = 1
 MESSAGE_COUNT = 10
+MESSAGE_RECEIVED_EVENT = threading.Event()
+
+AVG_WIND_SPEED = 10.0
+MSG_TXT = "{\"service client sent a message\": %.2f}"
+
 
     # String containing Hostname, SharedAccessKeyName & SharedAccessKey in the format:
     # "HostName=<host_name>;SharedAccessKeyName=<SharedAccessKeyName>;SharedAccessKey=<SharedAccessKey>"
 CONNECTION_STRING = "HostName=RobotForman.azure-devices.net;SharedAccessKeyName=iothubowner;SharedAccessKey=eJPYT9KWIMkC+8BYcqulBtVl/QxC0YNf7i7sxqiBFTg="
 DEVICE_ID = "PythonTest"
+iothub_messaging = IoTHubMessaging(CONNECTION_STRING)
 
 class ioTHub(object):
 
@@ -25,25 +31,81 @@ class ioTHub(object):
 
     def sendC2DMsg(msg):
         try:
-            iothub_messaging = IoTHubMessaging(CONNECTION_STRING)
-            iothub_messaging.set_feedback_message_callback(feedback_received_callback, FEEDBACK_CONTEXT)
+        
+          iothub_messaging = IoTHubMessaging(CONNECTION_STRING)
+          #time.sleep(10)
 
-            iothub_messaging.open(open_complete_callback, OPEN_CONTEXT)
-
-            message = IoTHubMessage(bytearray(msg, 'utf8'))
-
-         
-            iothub_messaging.send_async(DEVICE_ID, message, send_complete_callback, 1)
-            
-            iothub_messaging.close()
+          iothub_messaging.set_feedback_message_callback(feedback_received_callback, FEEDBACK_CONTEXT)
           
+          iothub_messaging.open(open_complete_callback, OPEN_CONTEXT)
+          
+          message = IoTHubMessage(bytearray(msg, 'utf8'))
+
+
+          i = 1
+          
+            # optional: assign ids
+          message.message_id = "message_%d" % i
+          message.correlation_id = "correlation_%d" % i
+            # optional: assign properties
+          prop_map = message.properties()
+          prop_text = "PropMsg_%d" % i
+          prop_map.add("Property", prop_text)
+
+
+
+          iothub_messaging.send_async(DEVICE_ID, message, send_complete_callback, i)
+          MESSAGE_RECEIVED_EVENT.wait(30)
+          iothub_messaging.close()    
         except IoTHubError as iothub_error:
             print ( "Unexpected error {0}" % iothub_error )
             return
         except KeyboardInterrupt:
             print ( "IoTHubMessaging sample stopped" )
-        return ''
+      
+    def iothub_messaging_sample_run():
+        try:
+            iothub_messaging = IoTHubMessaging(CONNECTION_STRING)
+            iothub_messaging.set_feedback_message_callback(feedback_received_callback, FEEDBACK_CONTEXT)
+            time.sleep(1)
+            iothub_messaging.open(open_complete_callback, OPEN_CONTEXT)
+            time.sleep(1)
+            for i in range(0, MESSAGE_COUNT):
+                print ( 'Sending message: {0}'.format(i) )
+                msg_txt_formatted = MSG_TXT % (
+                    AVG_WIND_SPEED + (random.random() * 4 + 2))
+                message = IoTHubMessage(bytearray(msg_txt_formatted, 'utf8'))
 
+                # optional: assign ids
+                message.message_id = "message_%d" % i
+                message.correlation_id = "correlation_%d" % i
+                # optional: assign properties
+                prop_map = message.properties()
+                prop_text = "PropMsg_%d" % i
+                prop_map.add("Property", prop_text)
+
+                iothub_messaging.send_async(DEVICE_ID, message, send_complete_callback, i)
+
+            try:
+                # Try Python 2.xx first
+                raw_input("Press Enter to continue...\n")
+            except:
+                pass
+                # Use Python 3.xx in the case of exception
+                input("Press Enter to continue...\n")
+
+            iothub_messaging.close()
+
+        except IoTHubError as iothub_error:
+            print ( "Unexpected error {0}" % iothub_error )
+            return
+        except KeyboardInterrupt:
+            print ( "IoTHubMessaging sample stopped" )
+
+
+
+
+    
     def usage():
         print ( "Usage: iothub_messaging_sample.py -c <connectionstring>" )
         print ( "    connectionstring: <HostName=<host_name>;SharedAccessKeyName=<SharedAccessKeyName>;SharedAccessKey=<SharedAccessKey>>" )
@@ -69,19 +131,19 @@ class ioTHub(object):
 
 def open_complete_callback(context):
     print ( 'open_complete_callback called with context: {0}'.format(context) )
-
+   
 
 def send_complete_callback(context, messaging_result):
     context = 0
     print ( 'send_complete_callback called with context : {0}'.format(context) )
     print ( 'messagingResult : {0}'.format(messaging_result) )
-
-
+  
+    
 def feedback_received_callback(context, batch_user_id, batch_lock_token, feedback_records):
     print ( 'feedback_received_callback called with context: {0}'.format(context) )
     print ( 'Batch userId                 : {0}'.format(batch_user_id) )
     print ( 'Batch lockToken              : {0}'.format(batch_lock_token) )
-
+    MESSAGE_RECEIVED_EVENT.set()
     if feedback_records:
         number_of_feedback_records = len(feedback_records)
         print ( 'Number of feedback records   : {0}'.format(number_of_feedback_records) )
@@ -95,3 +157,7 @@ def feedback_received_callback(context, batch_user_id, batch_lock_token, feedbac
             print ( '    correlationId            : {0}'.format(feedback_records[feedback_index]["correlationId"]) )
             print ( '    enqueuedTimeUtc          : {0}'.format(feedback_records[feedback_index]["enqueuedTimeUtc"]) )
             print ( '    originalMessageId        : {0}'.format(feedback_records[feedback_index]["originalMessageId"]) )
+
+
+
+   

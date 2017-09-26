@@ -3123,3 +3123,24 @@ System.FormatException: Input string was not in a correct format.
 2017-09-21T11:26:35: Deleting 2 files
 2017-09-21T11:26:35: Deleting "C:\Source\iotil-RobotAPI\RobotFlask\env3\.ptvs\_dummy_threading.idb"
 2017-09-21T11:26:35: Deleting "C:\Source\iotil-RobotAPI\RobotFlask\env3\.ptvs\_dummy__threading_local.idb"
+
+2017-09-21T14:50:49: Start analysis
+2017-09-21T14:50:50: IncludeModulesFromModulePath = win32com
+2017-09-21T14:50:50: Including c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio because asyncio.selectors needs updating
+2017-09-21T14:50:50: Deleting 0 files
+2017-09-21T14:50:50: astropy.CallDepth = 0
+2017-09-21T14:50:50: delphixpy.CallDepth = 0
+2017-09-21T14:50:50: matplotlib.CallDepth = 3
+2017-09-21T14:50:50: pandas.CallDepth = 0
+2017-09-21T14:50:50: sympy.CallDepth = 0
+2017-09-21T14:50:50: Start group "c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio" with 2 files
+2017-09-21T14:50:51: Parsing complete
+2017-09-21T14:50:51: Analyzing "asyncio.selectors" ("c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio\selectors.py")
+2017-09-21T14:50:51: Analyzing "asyncio.test_support" ("c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio\test_support.py")
+2017-09-21T14:50:51: Starting analysis of 2 modules
+2017-09-21T14:50:52: Analysis complete
+2017-09-21T14:50:52: Saving group "c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio"
+2017-09-21T14:50:52: [ERROR] asyncio.test_support._assert_python: Unknown has no name
+2017-09-21T14:50:52: [ERROR] asyncio.test_support._assert_python: Unknown has no name
+2017-09-21T14:50:52: End of group "c:\source\iotil-robotapi\robotflask\env3\lib\site-packages\asyncio"
+2017-09-21T14:50:52: Deleting 0 files

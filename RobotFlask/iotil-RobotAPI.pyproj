@@ -32,10 +32,10 @@
     <Compile Include="RobotFlask\ioTHub.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RobotFlask\Old\IoTHubMessage.py">
+    <Compile Include="RobotFlask\IoTHubMessage.py">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="RobotFlask\Old\ioThubMsgSender.py">
+    <Compile Include="RobotFlask\ioThubMsgSender.py">
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="RobotFlask\common.py">

@@ -19,7 +19,7 @@ import json
 from RobotFlask import common
 from RobotFlask import ioTHub
 
-
+import time
 
 
 
@@ -36,12 +36,14 @@ connectionString = 'HostName=RobotForman.azure-devices.net;DeviceId=PythonTest;S
 def go_command():
     
     dat = request.form
+    messagetxtfake =  "{\"service client sent a message\": \"to\"}"
    
     updateDic =common.common.generateData(dat)
     msg = json.dumps(updateDic)
     ioTHub.ioTHub.sendC2DMsg(msg)
+  #  ioTHub.ioTHub.iothub_messaging_sample_run()
+
     resp = Response(
                     status=200,
                     mimetype="application/json")
     return resp
- 

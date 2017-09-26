@@ -120,7 +120,7 @@ function getValues(id)
     Command.Cartisian.orientation.z = $('#orientationz' + id).val()
     Command._id = id;
     Command.FriendlyName = $('#FriendlyName' + id).val()
-
+    Command.Action = $('#Action' + id).val()
     Command.Order = $('#Order' + id).val()
     Command.Speed= $('#Speed' + id).val()
 
@@ -192,12 +192,12 @@ function EditCar(num, type, orentation, id)
 }
 function adjustHTML(measure)
 {
-    ret = '<div class="adjuster"><span class="arowInfo">'+measure+'</span><i class="fa fa-arrow-up" data-measure="'+measure+'" onclick="adjust(this)" aria-hidden="true"></i><i class="fa fa-arrow-down" aria-hidden="true"></i></div>'
+    ret = '<div class="adjuster"><span class="arowInfo">' + measure + '</span><i class="fa fa-arrow-up" data-measure="' + measure + '" onclick="adjust(this, 1)" aria-hidden="true"></i><i class="fa fa-arrow-down" data-measure="' + measure +'" onclick="adjust(this, -1)" aria-hidden="true"></i></div>'
     return ret;
 
 }
 
-function adjust(a)
+function adjust(a, way)
 {
     that = $(a)
 
@@ -213,16 +213,16 @@ function adjust(a)
     switch (measure)
     {
         case 'mm':
-            incriment = .001
+            incriment = .001 * way
             break;
         case 'nm':
-            incriment = .0001
+            incriment = .0001 * way
             break;
         case 'cm':
-            incriment = .01
+            incriment = .01 * way
             break;
         case 'dm':
-            incriment = .1
+            incriment = .1 * way
             break;
 
 

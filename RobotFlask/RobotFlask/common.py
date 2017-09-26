@@ -11,7 +11,8 @@ class common(object):
             "Cartisian.orientation.w":dat['Cartisian[orientation][w]'],
             "FriendlyName":dat["FriendlyName"],
             "Order":dat["Order"],
-            "Speed":dat["Speed"]
+            "Speed":dat["Speed"],
+             "Action":dat["Action"]
         }
        return updateDic
 
