@@ -82,6 +82,46 @@ def save_command():
 
     return resp
 
+
+@db.route('/command/Clone', methods=['POST'])
+def clone_command():
+    
+    dat = request.form
+  
+
+    updateDic =common.common.generateData2(dat)
+  
+    
+    collection.insert(
+        
+         updateDic
+        
+    )
+    resp = Response(response=dumps(dat),
+                    status=200,
+                    mimetype="application/json")
+
+    return resp
+
+
+@db.route('/command/Delete', methods=['POST'])
+def delete_command():
+    
+    dat = request.form
+    
+    Id =dat['id']
+  
+    
+    collection.remove(
+        {"_id":  ObjectId(dat["_id"])}
+        
+    )
+    resp = Response(response=dumps(dat),
+                    status=200,
+                    mimetype="application/json")
+
+    return resp
+
 '''
     
     data = collection.find()

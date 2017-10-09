@@ -10,12 +10,8 @@ $(function () {
         $.each(data, function (index, value) {
             var a = $('<a href="#" class="list-group-item" data-command="' + value + '" onclick="CommandDetail(this)">' + value + '</a>')
             obj.append(a)
-
-
         });
-
     });
-
 });
 
 function CommandDetail(a) {
@@ -70,7 +66,7 @@ function MakeMove(value, id) {
         html += '<div  class="col1" id="post'+value.Order+'">'
         html += '<h5>Cartisian</h5>'
         html += '<h6>Robot</h6>'
-
+        html += '<input type="hidden" id="Name'+ id+ '" value="'+value.Name+'">'
         html += EditCar(value.Cartisian.position.x, 'position', 'x', id)
         html += EditCar(value.Cartisian.position.y, 'position', 'y', id)
         html += EditCar(value.Cartisian.position.z, 'position', 'z', id)
@@ -123,7 +119,7 @@ function getValues(id)
     Command.Action = $('#Action' + id).val()
     Command.Order = $('#Order' + id).val()
     Command.Speed= $('#Speed' + id).val()
-
+    Command.Name = $('#Name' + id).val()
     return Command;
 }
 
@@ -137,6 +133,26 @@ function MoveNow(that, id)
         });
 
 }
+
+function DeleteRecord(that, id) {
+
+//    var Command = getValues(id);
+
+    Id = {}
+    Id.id = id;
+
+    $.post("/command/Delete",
+        Id,
+        function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+
+
+
+}
+
+
+
 
 function SaveDetails(that, id)
 {
@@ -154,6 +170,26 @@ function SaveDetails(that, id)
 
 
 }
+
+
+function CloneRecord(that, id) {
+
+    var Command = getValues(id);
+
+
+
+    $.post("/command/Clone",
+        Command,
+        function (data, status) {
+            //alert("Data: " + data + "\nStatus: " + status);
+        });
+
+
+
+}
+
+
+
 function GroupButtons(value) {
 
 

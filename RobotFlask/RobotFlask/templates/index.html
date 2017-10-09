@@ -32,6 +32,15 @@
     <div class="btn btn-default" onclick="MoveNow(this,'{{_id.$oid}}')">
         <i class="fa fa-arrow-circle-right fa-lg"></i> Move Now
     </div>
+    <br />
+    <div class="btn btn-default" onclick="DeleteRecord(this,'{{_id.$oid}}')">
+        <i class="fa fa-recycle fa-lg"></i> Delete
+    </div>
+
+    <div class="btn btn-default" onclick="CloneRecord(this,'{{_id.$oid}}')">
+        <i class="fa fa-clone fa-lg"></i> Clone
+    </div>
+
 </script>
 
 

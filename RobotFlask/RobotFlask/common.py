@@ -16,3 +16,24 @@ class common(object):
         }
        return updateDic
 
+    def generateData2(dat):
+       updateDic = {
+            "FriendlyName":dat["FriendlyName"],
+            "Order":dat["Order"],
+            "Speed":dat["Speed"],
+             "Action":dat["Action"],
+             "Name":dat["Name"]
+
+        }
+       updateDic["Cartisian"] = {}
+       updateDic["Cartisian"]["position"] = {}
+       updateDic["Cartisian"]["orientation"] = {}
+       updateDic["Cartisian"]["position"]["x"] = dat['Cartisian[position][x]']
+       updateDic["Cartisian"]["position"]["y"] = dat['Cartisian[position][y]']
+       updateDic["Cartisian"]["position"]["z"] = dat['Cartisian[position][z]']
+       updateDic["Cartisian"]["orientation"]["x"] = dat['Cartisian[orientation][x]']
+       updateDic["Cartisian"]["orientation"]["y"] = dat['Cartisian[orientation][y]']
+       updateDic["Cartisian"]["orientation"]["z"] = dat['Cartisian[orientation][z]']
+       updateDic["Cartisian"]["orientation"]["w"] = dat['Cartisian[orientation][w]']
+
+       return updateDic

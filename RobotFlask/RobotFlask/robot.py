@@ -6,10 +6,8 @@ from flask import render_template
 from RobotFlask import app
 from bson.json_util import dumps
 
-
 from flask import Response
 from flask import request
-
 
 import random
 import sys
@@ -41,9 +39,7 @@ def go_command():
     updateDic =common.common.generateData(dat)
     msg = json.dumps(updateDic)
     ioTHub.ioTHub.sendC2DMsg(msg)
-  #  ioTHub.ioTHub.iothub_messaging_sample_run()
+    #ioTHub.ioTHub.iothub_messaging_sample_run()
 
-    resp = Response(
-                    status=200,
-                    mimetype="application/json")
+    resp = Response(status=200, mimetype="application/json")
     return resp
